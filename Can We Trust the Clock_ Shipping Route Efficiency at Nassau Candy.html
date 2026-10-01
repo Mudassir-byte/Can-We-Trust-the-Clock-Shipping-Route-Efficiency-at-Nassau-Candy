@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Can We Trust the Clock? Shipping Route Efficiency at Nassau Candy</title>
+<meta name="description" content="An interactive research paper on factory-to-customer shipping route efficiency for Nassau Candy Distributor.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script defer src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+:root{--bg:#070a12;--bg-2:#0b1020;--card:rgba(16,24,43,.78);--stroke:rgba(255,255,255,.1);--stroke-strong:rgba(255,255,255,.18);--text:#f4f7fb;--muted:#9aa7bc;--muted-2:#6f7d93;--accent:#7c5cff;--accent-2:#00d4ff;--accent-3:#ffb547;--good:#39d98a;--warn:#ffcc66;--danger:#ff6b7a;--shadow:0 24px 80px rgba(0,0,0,.38);--radius:22px;--bar:68px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bar) + 12px)}
+body{margin:0;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7;overflow-x:hidden;background:radial-gradient(circle at 12% -10%,rgba(124,92,255,.32),transparent 30rem),radial-gradient(circle at 86% 0,rgba(0,212,255,.18),transparent 28rem),linear-gradient(145deg,var(--bg),var(--bg-2) 55%,#06070d);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,#000,transparent 78%)}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,.sg{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.03em}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:300;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.topbar{position:sticky;top:0;z-index:100;height:var(--bar);padding:env(safe-area-inset-top,0) clamp(1rem,4vw,3.5rem) 0;display:flex;align-items:center;justify-content:space-between;background:rgba(6,9,16,.78);border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(22px)}
+.brand{display:flex;gap:.7rem;align-items:center;font-weight:700;text-decoration:none;color:inherit}
+.mark{display:grid;place-items:center;width:38px;height:38px;font:800 .85rem "Space Grotesk";background:linear-gradient(145deg,var(--accent),var(--accent-2));border-radius:13px;box-shadow:0 12px 40px rgba(0,212,255,.22)}
+nav{display:flex;gap:.2rem;overflow-x:auto}nav a{padding:.45rem .8rem;color:var(--muted);font-size:.82rem;font-weight:700;text-decoration:none;border-radius:999px;white-space:nowrap;transition:.2s}
+nav a:hover,nav a.on{color:#fff;background:rgba(124,92,255,.35)}
+main{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem) 5rem}
+section{padding:4.5rem 0 1rem}
+.eyebrow{margin:0 0 .5rem;color:var(--accent-2);font-size:.73rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+h2{font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.1;margin:0 0 1rem}
+p{color:var(--muted);max-width:760px}p strong{color:#fff}
+.hero{min-height:calc(100vh - var(--bar));display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;padding:3rem 0}
+.hero h1{margin:0;font-size:clamp(2.6rem,5.6vw,5.2rem);line-height:.95;letter-spacing:-.06em}
+.hero h1 span{display:block;color:transparent;background:linear-gradient(100deg,#fff,#b8c7ff 42%,var(--accent-2));-webkit-background-clip:text;background-clip:text}
+.lede{font-size:1.15rem;margin:1.4rem 0 0}
+.btn{min-height:46px;padding:.7rem 1.2rem;font-weight:700;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.055);transition:.2s}
+.btn.pri{border:0;background:linear-gradient(135deg,var(--accent),#5a8cff 52%,var(--accent-2));box-shadow:0 14px 34px rgba(75,108,255,.24)}
+.btn:hover{transform:translateY(-2px);border-color:var(--stroke-strong)}
+.acts{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025)),var(--card);border:1px solid var(--stroke);box-shadow:var(--shadow);backdrop-filter:blur(22px);border-radius:var(--radius);padding:1.2rem;min-width:0}
+.hp{position:relative;overflow:hidden;border-radius:34px;padding:1.8rem}
+.hp::before{content:"";position:absolute;inset:12%;background:radial-gradient(circle,rgba(0,212,255,.25),transparent 58%),conic-gradient(from 90deg,transparent,rgba(124,92,255,.26),transparent);border-radius:50%;animation:spin 14s linear infinite}
+.hp>*{position:relative}@keyframes spin{to{transform:rotate(360deg)}}
+.stat{padding:1rem;margin-top:.8rem;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:18px}
+.stat span{display:block;color:var(--muted);font-size:.78rem;font-weight:700;line-height:1.3}.stat strong{font:700 1.8rem "Space Grotesk";letter-spacing:-.04em}
+.grid{display:grid;gap:1rem}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.card h3{margin:0 0 .3rem;font-size:1.05rem}.card p{font-size:.9rem;margin:.3rem 0 0}
+.ico{display:grid;place-items:center;width:34px;height:34px;margin-bottom:.7rem;font-weight:900;background:linear-gradient(145deg,var(--accent),var(--accent-2));border-radius:12px}
+.head{display:flex;flex-wrap:wrap;gap:.8rem;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem}
+.seg{display:flex;padding:.25rem;background:rgba(255,255,255,.06);border:1px solid var(--stroke);border-radius:12px}
+.seg button,.chip{padding:.42rem .75rem;color:var(--muted);font-size:.78rem;font-weight:800;background:transparent;border:0;border-radius:9px;transition:.2s}
+.seg button.on{color:#fff;background:rgba(124,92,255,.55)}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}.chip{border:1px solid var(--stroke);border-radius:999px;background:rgba(255,255,255,.055)}.chip:hover,.chip.on{color:#fff;background:rgba(124,92,255,.35);border-color:rgba(124,92,255,.68)}
+.chart{width:100%;height:360px}.chart.tall{height:440px}
+.note{margin-top:.6rem;font-size:.82rem;color:var(--muted-2)}
+.callout{margin:1rem 0;padding:1rem 1.2rem;color:#ffe2a3;background:rgba(255,181,71,.1);border:1px solid rgba(255,181,71,.24);border-radius:18px}.callout strong{color:#fff}
+.callout.ok{color:#c5f6dc;background:rgba(57,217,138,.09);border-color:rgba(57,217,138,.25)}
+.tip{position:relative;color:#b8c7ff;border-bottom:1px dashed var(--accent-2);cursor:help}
+.tip::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);width:max-content;max-width:260px;padding:.6rem .8rem;transform:translate(-50%,4px);color:var(--text);font-size:.78rem;line-height:1.45;font-weight:500;background:#141c33;border:1px solid var(--stroke-strong);border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.2s;z-index:50}
+.tip:hover::after,.tip:focus::after{opacity:1;transform:translate(-50%,0)}
+input[type=range]{width:100%;accent-color:var(--accent-2)}
+.big{font:700 clamp(2rem,4vw,3rem) "Space Grotesk";letter-spacing:-.04em}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}.rv.in{opacity:1;transform:none}
+.modal{position:fixed;inset:0;z-index:400;display:none;place-items:center;padding:1rem;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}.modal.open{display:grid}
+.modal .card{max-width:640px;max-height:86vh;overflow:auto;background:#10172b;animation:rise .35s ease}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.modal ol{color:var(--muted);padding-left:1.2rem;font-size:.92rem}.modal li{margin:.5rem 0}
+code{padding:.1rem .4rem;color:#b8c7ff;background:rgba(124,92,255,.13);border:1px solid rgba(124,92,255,.2);border-radius:.4rem;font-size:.85em}
+footer{padding:2rem 0;color:var(--muted-2);font-size:.82rem;border-top:1px solid var(--stroke)}
+@media(max-width:860px){.hero,.g2,.g3{grid-template-columns:1fr}nav{display:none}.hero{min-height:auto}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<header class="topbar">
+  <a class="brand" href="#top"><span class="mark">NC</span><span>Nassau Candy <span style="color:var(--muted);font-weight:500">· Research</span></span></a>
+  <nav id="nav"><a href="#intro">Introduction</a><a href="#method">Method</a><a href="#commercial">Commercial</a><a href="#audit">Data audit</a><a href="#modes">Ship modes</a><a href="#routes">Routes</a><a href="#conclusion">Conclusion</a></nav>
+</header>
+<main id="top">
+<div class="hero">
+  <div class="rv">
+    <p class="eyebrow">Research paper · Logistics analytics</p>
+    <h1>Can we trust the clock?<span>Shipping route efficiency at Nassau Candy.</span></h1>
+    <p class="lede">We set out to rank factory-to-customer routes by speed. What we found first is more important: the shipping timestamps themselves need repair before any ranking is safe.</p>
+    <div class="acts"><button class="btn pri" onclick="go('audit')">See the key finding</button><button class="btn" data-modal="mm">How we did it</button></div>
+  </div>
+  <aside class="card hp rv">
+    <p class="eyebrow">At a glance</p>
+    <div class="stat"><span>Order lines analysed</span><strong data-n="10194">0</strong></div>
+    <div class="stat"><span>Records with a recorded lead time over 30 days</span><strong data-n="100" data-s="%">0</strong></div>
+    <div class="stat"><span>Gross margin across all sales</span><strong data-n="65.9" data-s="%" data-d="1">0</strong></div>
+  </aside>
+</div>
+
+<section id="intro">
+  <p class="eyebrow">01 · Introduction</p><h2>Why shipping speed matters</h2>
+  <p>Nassau Candy Distributor ships confectionery from <strong>five factories</strong> to customers across the United States and Canada. When a route is slow, customers wait longer and working capital stays tied up. This study asks a practical question: <em>which factory-to-customer routes are efficient, and which are bottlenecks?</em></p>
+  <div class="grid g3" style="margin-top:1.5rem">
+    <div class="card rv"><div class="ico">1</div><h3>Objective</h3><p>Measure <span class="tip" tabindex="0" data-tip="Days between the order date and the ship date recorded in the system.">lead time</span> for every factory-to-state route and benchmark them.</p></div>
+    <div class="card rv"><div class="ico">2</div><h3>Significance</h3><p>Rankings guide carrier choices and inventory placement, so they must rest on trustworthy timestamps.</p></div>
+    <div class="card rv"><div class="ico">3</div><h3>Contribution</h3><p>A data-quality audit that shows what can, and cannot, be concluded from the current records.</p></div>
+  </div>
+</section>
+
+<section id="method">
+  <p class="eyebrow">02 · Data and method</p><h2>From raw orders to route-level evidence</h2>
+  <p>The dataset holds <strong>10,194 order lines</strong>, <strong>8,549 orders</strong> and <strong>5,044 customers</strong>, with order dates across 2024 and 2025. Each product maps to one factory, so every order line defines a route: factory → destination state.</p>
+  <div class="grid g3" style="margin-top:1rem">
+    <div class="card rv"><div class="ico">A</div><h3>Audit</h3><p>Parse dates, check mappings, test every lead time against a 30-day <span class="tip" tabindex="0" data-tip="A cut-off used to flag shipments as slow. Adjustable in the Data audit section.">delay threshold</span>.</p></div>
+    <div class="card rv"><div class="ico">B</div><h3>Engineer</h3><p>Compute lead time, factory-to-state distance, and gross margin per product.</p></div>
+    <div class="card rv"><div class="ico">C</div><h3>Benchmark</h3><p>Compare ship modes and routes, and test whether geography explains speed.</p></div>
+  </div>
+  <div class="acts"><button class="btn" data-modal="mm">Read the full method</button></div>
+</section>
+
+<section id="commercial">
+  <p class="eyebrow">03 · Commercial context</p><h2>What the business sells, and where it earns</h2>
+  <p>Before judging logistics, we need to know what flows through the routes. Sales and profit grew through 2025, and five chocolate bars carry the business.</p>
+  <div class="grid g2" style="margin-top:1rem">
+    <div class="card rv"><div class="head"><div><h3>Monthly trend</h3></div><div class="seg" data-for="trend"><button class="on" data-v="s">Sales</button><button data-v="p">Gross profit</button></div></div><div id="c-trend" class="chart"></div><p class="note">Monthly totals by order date, in US dollars.</p></div>
+    <div class="card rv"><div class="head"><div><h3>Products</h3></div><div class="seg" data-for="prod"><button class="on" data-v="s">Sales</button><button data-v="m">Margin %</button></div></div><div id="c-prod" class="chart"></div><p class="note">Sort order follows sales. Switch to margin to see which products earn least per dollar.</p></div>
+  </div>
+  <div class="callout ok rv"><strong>Takeaway:</strong> the five Wonka Bars generate about 93% of sales. <span class="tip" tabindex="0" data-tip="Gross profit divided by sales.">Gross margin</span> is high overall (65.9%), but Kazookles earns only 7.7%, which makes it a pricing or sourcing question.</div>
+</section>
+
+<section id="audit">
+  <p class="eyebrow">04 · Key finding</p><h2>The shipping clock is broken</h2>
+  <p>Every one of the 10,194 records shows a lead time above 30 days. The shortest is 904 days, the median is 1,274, and 96.9% of ship dates fall after 29 September 2026. A candy order does not take two to four years to ship, so these values cannot be real latency.</p>
+  <div class="card rv" style="margin-top:1rem">
+    <div class="head"><div><h3>Recorded lead time, all records</h3><p style="margin:0">Drag the threshold to see how many records it flags.</p></div><div style="text-align:right"><div class="big" id="share">100%</div><span class="note" style="margin:0">flagged as delayed</span></div></div>
+    <div id="c-hist" class="chart"></div>
+    <label for="thr" class="note" style="display:block">Delay threshold: <strong id="thrv" style="color:#fff">30 days</strong></label>
+    <input id="thr" type="range" min="0" max="1700" step="10" value="30">
+    <p class="note">The records form three tight bands that line up with the year in each Order ID (2021, 2022–23, 2024). That pattern points to a year-mapping error in the source system, an explanation we flag as likely but unconfirmed.</p>
+  </div>
+  <div class="callout rv"><strong>Stage-gate result:</strong> the defect rate is 100%, far above the 5% remediation trigger. Route rankings built on raw timestamps would be meaningless, so this paper treats them as a data-governance finding.</div>
+</section>
+
+<section id="modes">
+  <p class="eyebrow">05 · Recovering a signal</p><h2>Ship modes still tell the truth</h2>
+  <p>Within each band the gap between shipments is small, so we removed each band's constant offset by assuming <span class="tip" tabindex="0" data-tip="We subtract the median Same Day lead time of each Order ID year. This is an assumption, so treat the results as exploratory.">Same Day = 0 days</span>. If the leftover days are meaningful, faster modes should show fewer days. They do, in the expected order.</p>
+  <div class="card rv" style="margin-top:1rem">
+    <div class="head"><h3>Average lead time by ship mode</h3><div class="seg" data-for="mode"><button class="on" data-v="raw">Recorded</button><button data-v="adj">Offset-adjusted</button></div></div>
+    <div id="c-mode" class="chart"></div>
+    <p class="note">Both views start at zero. Recorded values look identical (about 1,330 days); adjusted values separate cleanly: Same Day 0.0, First Class 2.2, Second Class 3.2, Standard Class 5.0 days.</p>
+  </div>
+</section>
+
+<section id="routes">
+  <p class="eyebrow">06 · Route explorer</p><h2>Does geography explain speed?</h2>
+  <p>Choose a factory to see its busiest destination states. Line thickness shows order volume; hover for the adjusted lead time.</p>
+  <div class="card rv" style="margin-top:1rem">
+    <div class="head"><h3>Factory-to-state network</h3><div class="chips" id="facChips"></div></div>
+    <div id="c-net" class="chart tall"></div>
+    <p class="note">Top 10 destination states per factory by order lines. US destinations only (9,994 of 10,194 lines); state positions are approximate centroids.</p>
+  </div>
+  <div class="card rv" style="margin-top:1rem">
+    <h3>Adjusted lead time by shipping distance</h3>
+    <div id="c-dist" class="chart" style="height:300px"></div>
+    <p class="note">Correlation between distance and adjusted lead time: <strong style="color:#fff" id="corr"></strong>. Distance is great-circle miles from factory to state centroid.</p>
+  </div>
+  <div class="callout rv"><strong>Reading the result:</strong> shipments travelling under 500 miles take as long as those travelling over 2,000. Lead time follows the <em>ship mode chosen</em>, not the route, so differences between factories mostly reflect their ship-mode mix. The data cannot support a route leaderboard yet.</div>
+</section>
+
+<section id="conclusion">
+  <p class="eyebrow">07 · Conclusion</p><h2>What we learned, and what to do next</h2>
+  <div class="grid g3">
+    <div class="card rv"><div class="ico">!</div><h3>Fix the timestamps</h3><p>All 10,194 ship dates sit years from their order dates. Validate date extraction and year mapping at the source.</p></div>
+    <div class="card rv"><div class="ico">✓</div><h3>Ship modes behave</h3><p>After offset adjustment, mode ordering matches expectations, which suggests the fix is recoverable.</p></div>
+    <div class="card rv"><div class="ico">$</div><h3>Protect the core</h3><p>Chocolate drives sales and margin. Review Kazookles pricing at 7.7% margin.</p></div>
+  </div>
+  <p style="margin-top:1.5rem"><strong>Limitations.</strong> The offset adjustment is an assumption, distance uses state centroids, and 313 order lines repeat all fields except Row ID (kept, as they may be genuine repeat purchases). Once corrected dates arrive, rerun the benchmark with real lead times and the five-phase workflow.</p>
+  <div class="acts"><button class="btn pri" onclick="go('audit')">Revisit the audit</button><button class="btn" onclick="go('routes')">Explore routes again</button><button class="btn" data-modal="mm">Method</button></div>
+</section>
+<footer>Source: Nassau Candy Distributor dataset (10,194 order lines, 2024–2025). All figures computed directly from that file. Factory locations and product-to-factory mapping follow the project specification.</footer>
+</main>
+
+<div class="modal" id="mm" role="dialog" aria-modal="true" aria-label="Method"><div class="card">
+  <div class="head"><h3 style="font-size:1.4rem">Method in detail</h3><button class="btn" data-close>Close</button></div>
+  <ol>
+    <li>Parse <code>Order Date</code> and <code>Ship Date</code> (day-month-year) and compute lead time in days.</li>
+    <li>Map each <code>Product ID</code> to one of five factories; no product was unmapped.</li>
+    <li>Flag lead times above a 30-day threshold; compare the defect rate with the 5% remediation trigger.</li>
+    <li>Compute an offset-adjusted lead: recorded lead minus the median Same Day lead of the order's Order ID year.</li>
+    <li>Estimate great-circle distance from each factory to the destination state centroid (US only) and correlate it with adjusted lead.</li>
+  </ol>
+  <p class="note">No rows were removed. Margins are gross profit divided by sales.</p>
+</div></div>
+
+<script>
+const D={"months":["2024-01","2024-02","2024-03","2024-04","2024-05","2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12"],"ms":[2094,1380,4139,3988,3952,3519,3865,4478,7912,4816,8918,8896,3489,2554,5423,4922,6556,6215,6058,5740,11458,7346,11729,12338],"mp":[1366,909,2671,2613,2615,2331,2565,2946,5207,3119,5947,5862,2329,1678,3588,3266,4329,4124,3983,3795,7499,4834,7751,8116],"prods":[["Wonka Bar \u2013 Triple Dazzle Caramel",28485,18610],["Wonka Bar \u2013 Scrumdiddlyumptious",27875,19358],["Wonka Bar \u2013 Milk Chocolate",26868,17443],["Wonka Bar \u2013 Fudge Mallows",24890,16594],["Wonka Bar \u2013 Nutty Crunch Surprise",23575,16820],["Lickable Wallpaper",7860,3930],["Kazookles",1206,93],["Wonka Gum",598,311],["Everlasting Gobstopper",130,104],["Fizzy Lifting Drinks",79,47],["Hair Toffee",76,60],["SweeTARTS",62,29],["Laffy Taffy",54,33],["Nerds",15,7],["Fun Dip",12,5]],"hist":{"904":89,"905":40,"906":289,"907":176,"908":591,"909":519,"910":207,"911":134,"912":4,"915":2,"1269":258,"1270":156,"1271":610,"1272":456,"1273":1326,"1274":1035,"1275":612,"1276":293,"1277":18,"1634":3,"1635":179,"1636":190,"1637":449,"1638":411,"1639":896,"1640":657,"1641":397,"1642":197},"modes":{"First Class":[1548,1338.28,2.18,0.79],"Same Day":[547,1333.44,0.04,0.22],"Second Class":[1979,1323.85,3.24,1.21],"Standard Class":[6120,1314.33,5.0,1.04]},"dist":[["(0, 500]",820,4.04],["(500, 1000]",3838,3.94],["(1000, 1500]",1612,4.06],["(1500, 2000]",1695,3.84],["(2000, 3000]",2029,3.98]],"net":{"Lot's O' Nuts":[["California",37.2,-119.4,1125,15045,3.78],["New York",42.9,-75.5,645,8758,4.04],["Texas",31.5,-99.3,569,7642,3.95],["Pennsylvania",40.9,-77.8,331,4339,3.84],["Washington",47.4,-120.6,269,3493,4.01],["Illinois",40.0,-89.2,267,3539,4.11],["Ohio",40.3,-82.8,262,3473,3.47],["Florida",28.6,-82.4,209,2640,3.83],["Michigan",44.7,-85.5,147,2104,3.94],["North Carolina",35.5,-79.4,143,2046,4.06]],"Wicked Choccy's":[["California",37.2,-119.4,823,11394,3.99],["New York",42.9,-75.5,436,5518,4.09],["Texas",31.5,-99.3,388,5140,3.93],["Pennsylvania",40.9,-77.8,227,2804,3.93],["Washington",47.4,-120.6,221,3023,3.87],["Illinois",40.0,-89.2,210,2802,4.16],["Ohio",40.3,-82.8,189,2480,3.47],["Florida",28.6,-82.4,161,2009,4.07],["Virginia",37.5,-78.9,106,1490,4.11],["Arizona",34.3,-111.7,105,1430,4.1]],"Sugar Shack":[["New York",42.9,-75.5,9,57,4.22],["Michigan",44.7,-85.5,3,18,4.0],["Florida",28.6,-82.4,3,37,5.33],["Pennsylvania",40.9,-77.8,3,24,5.33],["Texas",31.5,-99.3,3,15,4.33],["Ohio",40.3,-82.8,2,18,2.5],["Illinois",40.0,-89.2,2,12,2.5],["Delaware",39.0,-75.5,1,4,6.0],["Arizona",34.3,-111.7,1,11,5.0],["California",37.2,-119.4,1,6,3.0]],"Secret Factory":[["California",37.2,-119.4,31,1239,3.61],["New York",42.9,-75.5,24,1026,3.71],["Pennsylvania",40.9,-77.8,19,762,3.58],["Texas",31.5,-99.3,16,518,3.38],["Illinois",40.0,-89.2,13,546,3.0],["Ohio",40.3,-82.8,13,769,3.77],["Washington",47.4,-120.6,11,351,3.73],["Florida",28.6,-82.4,7,79,4.0],["Colorado",39.0,-105.5,7,171,3.0],["Georgia",32.7,-83.4,7,318,4.0]],"The Other Factory":[["California",37.2,-119.4,21,234,3.52],["New York",42.9,-75.5,14,182,4.21],["Texas",31.5,-99.3,9,101,3.44],["Pennsylvania",40.9,-77.8,7,98,3.86],["Virginia",37.5,-78.9,4,55,2.75],["Washington",47.4,-120.6,4,52,5.75],["Massachusetts",42.3,-71.8,3,32,3.33],["New Jersey",40.1,-74.7,3,68,4.33],["Ohio",40.3,-82.8,3,29,3.0],["Florida",28.6,-82.4,3,39,3.67]]},"fac":{"Lot's O' Nuts":[32.881893,-111.768036],"Wicked Choccy's":[32.076176,-81.088371],"Sugar Shack":[48.11914,-96.18115],"Secret Factory":[41.446333,-90.565487],"The Other Factory":[35.1175,-89.971107]},"corr":0.001};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const go=id=>document.getElementById(id).scrollIntoView({behavior:RM?'auto':'smooth'});
+const C=['#7c5cff','#00d4ff','#ffb547','#39d98a','#ff6b9d'];
+const ax={axisLine:{lineStyle:{color:'rgba(255,255,255,.18)'}},axisLabel:{color:'#9aa7bc'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}};
+const base={animation:!RM,textStyle:{fontFamily:'Inter,sans-serif'},grid:{left:56,right:20,top:24,bottom:36},tooltip:{backgroundColor:'#141c33',borderColor:'rgba(255,255,255,.18)',textStyle:{color:'#f4f7fb'}}};
+const money=v=>'$'+Math.round(v).toLocaleString();
+const charts={},draw={};
+const state={trend:'s',prod:'s',mode:'raw',fac:'All'};
+function mk(id,fn){draw[id]=fn;const el=$('#c-'+id);new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){charts[id]=echarts.init(el);fn();o.disconnect()}},{rootMargin:'200px'}).observe(el)}
+const upd=id=>charts[id]&&draw[id]();
+// scroll reveal, progress, nav, count-up
+$$('.rv').forEach(el=>new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){el.classList.add('in');o.disconnect()}},{threshold:.12}).observe(el));
+addEventListener('scroll',()=>{const h=document.documentElement;$('#prog').style.width=(100*h.scrollTop/(h.scrollHeight-h.clientHeight))+'%'},{passive:true});
+const links=$$('#nav a'),secs=links.map(a=>$(a.getAttribute('href')));
+secs.forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'}).observe(s));
+$$('[data-n]').forEach(el=>{const t=+el.dataset.n,d=+el.dataset.d||0,s=el.dataset.s||'',f=v=>v.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d})+s;
+ if(RM){el.textContent=f(t);return}let t0;const step=ts=>{t0=t0||ts;const p=Math.min((ts-t0)/1400,1);el.textContent=f(t*(1-Math.pow(1-p,3)));p<1&&requestAnimationFrame(step)};requestAnimationFrame(step)});
+// segmented controls
+$$('.seg').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));state[g.dataset.for]=b.dataset.v;upd(g.dataset.for)}));
+// modal
+$$('[data-modal]').forEach(b=>b.addEventListener('click',()=>$('#'+b.dataset.modal).classList.add('open')));
+$$('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m||e.target.hasAttribute('data-close'))m.classList.remove('open')}));
+addEventListener('keydown',e=>e.key==='Escape'&&$$('.modal').forEach(m=>m.classList.remove('open')));
+// charts
+mk('trend',()=>{const k=state.trend,v=k==='s'?D.ms:D.mp;charts.trend.setOption({...base,xAxis:{type:'category',data:D.months,...ax,axisLabel:{color:'#9aa7bc',formatter:x=>x.slice(2)}},yAxis:{type:'value',...ax,axisLabel:{color:'#9aa7bc',formatter:money}},tooltip:{...base.tooltip,trigger:'axis',valueFormatter:money},series:[{type:'line',smooth:true,symbol:'none',data:v,lineStyle:{width:3,color:k==='s'?C[0]:C[1]},areaStyle:{color:k==='s'?'rgba(124,92,255,.25)':'rgba(0,212,255,.22)'}}]},true)});
+mk('prod',()=>{const k=state.prod,P=D.prods.slice().reverse(),m=k==='m';charts.prod.setOption({...base,grid:{left:150,right:30,top:10,bottom:30},xAxis:{type:'value',...ax,axisLabel:{color:'#9aa7bc',formatter:m?(x=>x+'%'):money}},yAxis:{type:'category',data:P.map(p=>p[0].replace('Wonka Bar – ','WB · ')),...ax,axisLabel:{color:'#9aa7bc',fontSize:11}},tooltip:{...base.tooltip,trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:v=>m?v.toFixed(1)+'%':money(v)},series:[{type:'bar',data:P.map(p=>m?+(100*p[2]/p[1]).toFixed(1):p[1]),itemStyle:{borderRadius:[0,6,6,0],color:p=>m&&P[p.dataIndex][0]==='Kazookles'?'#ff6b7a':C[m?3:0]}}]},true)});
+const thr=$('#thr'),tot=Object.values(D.hist).reduce((a,b)=>a+b,0);
+function share(){const T=+thr.value;let n=0;for(const k in D.hist)if(+k>T)n+=D.hist[k];$('#share').textContent=(100*n/tot).toFixed(1).replace('.0','')+'%';$('#thrv').textContent=T+' days'}
+mk('hist',()=>{const T=+thr.value;charts.hist.setOption({...base,xAxis:{type:'value',min:0,max:1700,name:'Recorded lead time (days)',nameLocation:'middle',nameGap:26,nameTextStyle:{color:'#9aa7bc'},...ax},yAxis:{type:'value',name:'Records',nameTextStyle:{color:'#9aa7bc'},...ax},tooltip:{...base.tooltip,formatter:p=>p.value[0]+' days: '+p.value[1].toLocaleString()+' records'},series:[{type:'bar',barWidth:6,data:Object.entries(D.hist).map(([k,v])=>({value:[+k,v],itemStyle:{color:+k>T?'#ff6b7a':'#39d98a'}})),markLine:{symbol:'none',silent:true,lineStyle:{color:'#ffb547',type:'dashed'},label:{color:'#ffb547',formatter:'threshold'},data:[{xAxis:T}]}}]},true)});
+thr.addEventListener('input',()=>{share();upd('hist')});share();
+mk('mode',()=>{const raw=state.mode==='raw',M=Object.entries(D.modes).sort((a,b)=>a[1][2]-b[1][2]);charts.mode.setOption({...base,xAxis:{type:'category',data:M.map(m=>m[0]),...ax},yAxis:{type:'value',min:0,...ax,name:'Days',nameTextStyle:{color:'#9aa7bc'}},tooltip:{...base.tooltip,formatter:p=>{const m=M[p.dataIndex][1];return p.name+'<br>Records: '+m[0].toLocaleString()+'<br>Recorded: '+m[1].toFixed(0)+' days<br>Adjusted: '+m[2].toFixed(1)+' ± '+m[3].toFixed(1)+' (sd)'}},series:[{type:'bar',barWidth:'46%',label:{show:true,position:'top',color:'#f4f7fb',formatter:p=>p.value.toFixed(raw?0:1)},data:M.map((m,i)=>({value:raw?m[1][1]:m[1][2],itemStyle:{color:C[i],borderRadius:[8,8,0,0]}}))}]},true)});
+const F=Object.keys(D.fac);$('#facChips').innerHTML=['All',...F].map(f=>`<button class="chip${f==='All'?' on':''}" data-f="${f}">${f}</button>`).join('');
+$('#facChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;$$('#facChips .chip').forEach(x=>x.classList.toggle('on',x===b));state.fac=b.dataset.f;upd('net')});
+mk('net',()=>{const fs=state.fac==='All'?F:[state.fac],lines=[],pts=[];
+ fs.forEach(f=>{const fc=D.fac[f];pts.push({name:f,value:[fc[1],fc[0]],symbolSize:16,itemStyle:{color:C[F.indexOf(f)]},label:{show:true,formatter:f,position:'top',color:'#f4f7fb',fontSize:11}});
+  D.net[f].forEach(r=>{lines.push({coords:[[fc[1],fc[0]],[r[2],r[1]]],lineStyle:{width:1+Math.sqrt(r[3])/3,color:C[F.indexOf(f)],opacity:.55,curveness:.15},st:r[0],f,n:r[3],s:r[4],a:r[5]});pts.push({name:r[0],value:[r[2],r[1]],symbolSize:6,itemStyle:{color:'#9aa7bc'},st:r[0],f,n:r[3],a:r[5]})})});
+ charts.net.setOption({...base,grid:{left:20,right:20,top:20,bottom:20},xAxis:{type:'value',min:-126,max:-66,show:false},yAxis:{type:'value',min:24,max:50,show:false},tooltip:{...base.tooltip,formatter:p=>p.data.st?`<strong>${p.data.f} → ${p.data.st}</strong><br>Order lines: ${p.data.n.toLocaleString()}<br>Adjusted lead: ${p.data.a} days`:p.name},series:[{type:'lines',coordinateSystem:'cartesian2d',data:lines,effect:RM?{show:false}:{show:true,period:5,trailLength:.3,symbolSize:3},lineStyle:{curveness:.15}},{type:'scatter',data:pts}]},true)});
+mk('dist',()=>{const L=['<500','500–1,000','1,000–1,500','1,500–2,000','2,000+'];charts.dist.setOption({...base,xAxis:{type:'category',data:L,name:'Distance (miles)',nameLocation:'middle',nameGap:28,nameTextStyle:{color:'#9aa7bc'},...ax},yAxis:{type:'value',min:0,max:6,...ax,name:'Days',nameTextStyle:{color:'#9aa7bc'}},tooltip:{...base.tooltip,formatter:p=>p.name+' mi<br>'+D.dist[p.dataIndex][1].toLocaleString()+' lines<br>Adjusted lead: '+p.value.toFixed(2)+' days'},series:[{type:'bar',barWidth:'42%',label:{show:true,position:'top',color:'#f4f7fb',formatter:p=>p.value.toFixed(2)},itemStyle:{color:C[1],borderRadius:[8,8,0,0]},data:D.dist.map(d=>d[2])}]},true)});
+$('#corr').textContent='r = '+D.corr.toFixed(3)+' (effectively none)';
+addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
+</script>
+</body>
+</html>
